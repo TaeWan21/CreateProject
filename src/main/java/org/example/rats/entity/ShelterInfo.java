@@ -11,9 +11,9 @@ import org.example.rats.dto.shelter.Row;
 @Entity
 public class ShelterInfo {
 
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "area_code")
     private String arcd;// 지역코드
 

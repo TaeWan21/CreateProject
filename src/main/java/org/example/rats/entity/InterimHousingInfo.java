@@ -17,6 +17,7 @@ public class InterimHousingInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "area_code")
     private String arcd;// 지역코드
 

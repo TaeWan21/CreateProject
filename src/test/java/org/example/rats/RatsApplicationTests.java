@@ -35,9 +35,10 @@ class RatsApplicationTests {
 
         for (int pageNo = 1; pageNo <= 12; pageNo++) {
             int numOfRows = 1000;
-            String apiUrl = "https://apis.data.go.kr/1741000/EarthquakeIndoors3/getEarthquakeIndoors3List?serviceKey=v6JyEA3awH%2FtsTfbPzCUp4ml2PWMZf06Iz2WVDph4KoAH6rRh5vhw8vbIHyLTzDeaswzIvQH6E2VdRPR41%2Fwxw%3D%3D&pageNo={0}&numOfRows={1}&type=json";
+            String serviceKey = "v6JyEA3awH%2FtsTfbPzCUp4ml2PWMZf06Iz2WVDph4KoAH6rRh5vhw8vbIHyLTzDeaswzIvQH6E2VdRPR41%2Fwxw%3D%3D";
+            String apiUrl = "https://apis.data.go.kr/1741000/EarthquakeIndoors3/getEarthquakeIndoors3List?serviceKey={0}&pageNo={1}&numOfRows={2}&type=json";
 
-            String url = MessageFormat.format(apiUrl, Integer.toString(pageNo), Integer.toString(numOfRows));
+            String url = MessageFormat.format(apiUrl, serviceKey, Integer.toString(pageNo), Integer.toString(numOfRows));
             URL urlObj = new URL(url);
             ShelterResponse shelterResponse = objectMapper.readValue(urlObj, ShelterResponse.class);
 
@@ -54,18 +55,19 @@ class RatsApplicationTests {
 
     @Test
     void saveInterimHousingAPIToDB() throws IOException {
-
+        String serviceKey = "v6JyEA3awH%2FtsTfbPzCUp4ml2PWMZf06Iz2WVDph4KoAH6rRh5vhw8vbIHyLTzDeaswzIvQH6E2VdRPR41%2Fwxw%3D%3D";
         for (int pageNo = 1; pageNo <= 6; pageNo++) {
             int numOfRows = 1000;
-            String apiUrl = "https://apis.data.go.kr/1741000/EarthquakeIndoors3/getEarthquakeIndoors3List?serviceKey=v6JyEA3awH%2FtsTfbPzCUp4ml2PWMZf06Iz2WVDph4KoAH6rRh5vhw8vbIHyLTzDeaswzIvQH6E2VdRPR41%2Fwxw%3D%3D&pageNo={0}&numOfRows={1}&type=json";
 
-            String url = MessageFormat.format(apiUrl, Integer.toString(pageNo), Integer.toString(numOfRows));
+            String apiUrl = "https://apis.data.go.kr/1741000/EarthquakeIndoors3/getEarthquakeIndoors3List?serviceKey={0}&pageNo={1}&numOfRows={2}&type=json";
+
+            String url = MessageFormat.format(apiUrl, serviceKey, Integer.toString(pageNo), Integer.toString(numOfRows));
             URL urlObj = new URL(url);
             EarthquakeResponse earthquakeResponse = objectMapper.readValue(urlObj, EarthquakeResponse.class);
 
 //            System.out.println(earthquakeResponse);
-            List<Row> row = earthquakeResponse.getEarthquakeIndoors().getLast().getRow(); // 1000개
-
+            List<Row> row = earthquakeResponse.getEarthquakeIndoors().get(1).getRow(); // 1000개
+            System.out.println(row.size());
             List<InterimHousingInfo> silist = new ArrayList<>();
             row.forEach(info -> {
                 InterimHousingInfo ihInfo = InterimHousingInfo.from(info);
