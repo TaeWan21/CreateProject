@@ -16,4 +16,9 @@ public class ShelterService {
     public List<ShelterInfo> findAllShelterInfos() {
         return shelterInfoRepository.findAll();
     }
+
+    // 반경 3km 이내 대피소 조회
+    public List<ShelterInfo> findNearShelterByLocation(double latitude, double longitude) {
+        return shelterInfoRepository.findNearShelterByLocation(latitude, longitude);
+    }
 }

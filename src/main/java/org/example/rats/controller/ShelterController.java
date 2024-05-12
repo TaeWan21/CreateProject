@@ -22,4 +22,9 @@ public class ShelterController {
     public List<ShelterInfo> findAll() {
         return shelterService.findAllShelterInfos();
     }
+
+    @GetMapping("/shelter/findNear")
+    public List<ShelterInfo> findNear(double latitude, double longitude) {
+        return shelterService.findNearShelterByLocation(latitude, longitude);
+    }
 }
