@@ -12,6 +12,7 @@ import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -41,6 +42,15 @@ public class EarthquakeInfoService {
 
         Response info = objectMapper.readValue(urlObj, Response.class);
 
-        return info.getResponse().getBody().getItems().getItems();
+        System.out.println(info.getResponse().getBody().getItems().getItems());
+        System.out.println(filterItems(info.getResponse().getBody().getItems().getItems()));
+
+        return filterItems(info.getResponse().getBody().getItems().getItems());
+    }
+
+    // 대한민국에 해당하는 지진 정보만 필터링
+    public List<Item> filterItems(List<Item> items) {
+        return items.stream()
+                .filter(item -> item.getLoc().contains("대한민국")).collect(Collectors.toList());
     }
 }
