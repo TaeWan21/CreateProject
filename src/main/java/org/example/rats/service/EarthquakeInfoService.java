@@ -42,9 +42,6 @@ public class EarthquakeInfoService {
 
         Response info = objectMapper.readValue(urlObj, Response.class);
 
-        System.out.println(info.getResponse().getBody().getItems().getItems());
-        System.out.println(filterItems(info.getResponse().getBody().getItems().getItems()));
-
         return filterItems(info.getResponse().getBody().getItems().getItems());
     }
 
