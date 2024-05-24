@@ -1,6 +1,8 @@
 package org.example.rats;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.rats.dto.earthquakeInfo.EarthquakeInfoResponse;
+import org.example.rats.dto.earthquakeInfo.Response;
 import org.example.rats.dto.interimHousing.EarthquakeResponse;
 import org.example.rats.dto.interimHousing.Row;
 import org.example.rats.entity.InterimHousingInfo;
@@ -13,8 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +80,31 @@ class RatsApplicationTests {
             });
             interimHousingInfoRepository.saveAllAndFlush(silist);
         }
+    }
+
+    @Test
+    void EarthquakeInfoTest() throws IOException {
+        String serviceKey = "v6JyEA3awH%2FtsTfbPzCUp4ml2PWMZf06Iz2WVDph4KoAH6rRh5vhw8vbIHyLTzDeaswzIvQH6E2VdRPR41%2Fwxw%3D%3D";
+        int numOfRows = 50;
+        String apiUrl = "https://apis.data.go.kr/1360000/EqkInfoService/getEqkMsg?serviceKey={0}&pageNo=1&numOfRows=50&dataType=json&fromTmFc={1}&toTmFc={2}";
+        // 현재 날짜 구하기
+        LocalDate now = LocalDate.now();
+
+        // 현재로부터 3일뺴기
+        LocalDate minusThreeDays = now.minusDays(3);
+
+        // 포맷 정의
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+        // 포맷 적용
+        String nowDate = now.format(formatter);
+        String minusThreeDaysDate = minusThreeDays.format(formatter);
+
+        String url = MessageFormat.format(apiUrl, serviceKey, minusThreeDaysDate, nowDate);
+
+        URL urlObj = new URL(url);
+
+        Response Info = objectMapper.readValue(urlObj, Response.class);
     }
 
 }
