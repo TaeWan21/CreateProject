@@ -13,8 +13,15 @@ public interface ShelterInfoRepository extends JpaRepository<ShelterInfo, Long> 
     @Query(
             value = "SELECT *, ST_DISTANCE_SPHERE(location, POINT(:long, :lati)) AS distance " +
                     "FROM shelter_info " +
-                    "WHERE ST_DISTANCE_SPHERE(location, POINT(:long, :lati)) <= 3000 " +
-                    "ORDER BY distance",
+                    "WHERE MBRContains( " +
+                    "    LineString(\n" +
+                    "        Point(:long - 0.045 / COS(RADIANS(:lati)), :lati - 0.045), " +
+                    "        Point(:long + 0.045 / COS(RADIANS(:lati)), :lati + 0.045) " +
+                    "    ), " +
+                    "    location " +
+                    ") " +
+                    "AND ST_DISTANCE_SPHERE(location, POINT(:long, :lati)) <= 3000 " +
+                    "ORDER BY distance ",
             nativeQuery = true
     )
     List<ShelterInfo> findNearShelterByLocation(@Param("lati") double latitude, @Param("long") double longitude);
