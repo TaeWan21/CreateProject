@@ -44,7 +44,7 @@ public class EarthquakeInfoService {
 
         //테스트를 위해 대한민국에 임의의 지진 정보를 추가
         Item item1 = new Item();
-        item1.setLoc("대한민국");
+        item1.setLoc("대한민국 금오공대 금오지");
         item1.setLat("36.141787443678");
         item1.setLon("128.395795435");
         item1.setMt("5.0");
