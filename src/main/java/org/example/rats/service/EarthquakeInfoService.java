@@ -43,15 +43,27 @@ public class EarthquakeInfoService {
         Response info = objectMapper.readValue(urlObj, Response.class);
 
         //테스트를 위해 대한민국에 임의의 지진 정보를 추가
-        Item item = new Item();
-        item.setLoc("대한민국");
-        item.setLat("36.141587443678");
-        item.setLon("128.39538542686");
-        item.setMt("5.0");
+        Item item1 = new Item();
+        item1.setLoc("대한민국");
+        item1.setLat("36.141787443678");
+        item1.setLon("128.395795435");
+        item1.setMt("5.0");
 
-        info.getResponse().getBody().getItems().getItems().add(item);
+        Item item2 = new Item();
+        item2.setLoc("대한민국 금오공대 운동장");
+        item2.setLat("36.146080");
+        item2.setLon("128.387574");
+        item2.setMt("3.0");
 
+        Item item3 = new Item();
+        item3.setLoc("대한민국 금오공대 옆 산골짜기");
+        item3.setLat("36.140266");
+        item3.setLon("128.386423");
+        item3.setMt("7.9");
 
+        info.getResponse().getBody().getItems().getItems().add(item1);
+        info.getResponse().getBody().getItems().getItems().add(item2);
+        info.getResponse().getBody().getItems().getItems().add(item3);
 
         return filterItems(info.getResponse().getBody().getItems().getItems());
     }
