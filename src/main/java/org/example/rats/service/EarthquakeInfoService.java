@@ -42,6 +42,16 @@ public class EarthquakeInfoService {
 
         Response info = objectMapper.readValue(urlObj, Response.class);
 
+        //테스트를 위해 대한민국에 임의의 지진 정보를 추가
+        Item item = new Item();
+        item.setLoc("대한민국");
+        item.setLat("36.141587443678");
+        item.setLon("128.39538542686");
+        item.setMt("5.0");
+
+        info.getResponse().getBody().getItems().getItems().add(item);
+
+
 
         return filterItems(info.getResponse().getBody().getItems().getItems());
     }
