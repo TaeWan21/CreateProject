@@ -66,6 +66,9 @@ public class ShelterInfo {
     private String rnAdres;// 도로명주소
 
     @Transient
+    private double distance;
+
+    @Transient
     public static ShelterInfo from(Row row){
         return ShelterInfo.builder()
                 .acmdfcltySENm(row.getAcmdfcltySENm())
