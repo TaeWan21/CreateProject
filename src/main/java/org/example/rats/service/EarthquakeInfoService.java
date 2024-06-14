@@ -65,12 +65,12 @@ public class EarthquakeInfoService {
         info.getResponse().getBody().getItems().getItems().add(item2);
         info.getResponse().getBody().getItems().getItems().add(item3);
 
-        return filterItems(info.getResponse().getBody().getItems().getItems());
+        return info.getResponse().getBody().getItems().getItems();
     }
 
-    // 대한민국에 해당하는 지진 정보만 필터링
-    public List<Item> filterItems(List<Item> items) {
-        return items.stream()
-                .filter(item -> item.getLoc().contains("대한민국")).collect(Collectors.toList());
-    }
+//    // 대한민국에 해당하는 지진 정보만 필터링
+//    public List<Item> filterItems(List<Item> items) {
+//        return items.stream()
+//                .filter(item -> item.getLoc().contains("대한민국")).collect(Collectors.toList());
+//    }
 }
