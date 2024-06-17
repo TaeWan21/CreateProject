@@ -68,9 +68,14 @@ public class EarthquakeInfoService {
         return info.getResponse().getBody().getItems().getItems();
     }
 
-//    // 대한민국에 해당하는 지진 정보만 필터링
-//    public List<Item> filterItems(List<Item> items) {
-//        return items.stream()
-//                .filter(item -> item.getLoc().contains("대한민국")).collect(Collectors.toList());
-//    }
+    // 북위 33도에서 43도, 동경 124도에서 132도 사이에 있는 지진 정보만 필터링
+    public List<Item> filterItems(List<Item> items) {
+        return items.stream()
+                .filter(item -> {
+                    double lat = Double.parseDouble(item.getLat());
+                    double lon = Double.parseDouble(item.getLon());
+                    return lat >= 33 && lat <= 43 && lon >= 124 && lon <= 132;
+                })
+                .collect(Collectors.toList());
+    }
 }
