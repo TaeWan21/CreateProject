@@ -61,9 +61,16 @@ public class EarthquakeInfoService {
         item3.setLon("128.386423");
         item3.setMt("7.9");
 
+        Item item4 = new Item();
+        item4.setLoc("포항시 오천읍 오천교회 근처");
+        item4.setLat("35.973103");
+        item4.setLon("129.414515");
+        item4.setMt("5.3");
+
         info.getResponse().getBody().getItems().getItems().add(item1);
         info.getResponse().getBody().getItems().getItems().add(item2);
         info.getResponse().getBody().getItems().getItems().add(item3);
+        info.getResponse().getBody().getItems().getItems().add(item4);
 
         return filterItems(info.getResponse().getBody().getItems().getItems());
     }
