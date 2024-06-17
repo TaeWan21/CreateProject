@@ -65,7 +65,7 @@ public class EarthquakeInfoService {
         info.getResponse().getBody().getItems().getItems().add(item2);
         info.getResponse().getBody().getItems().getItems().add(item3);
 
-        return info.getResponse().getBody().getItems().getItems();
+        return filterItems(info.getResponse().getBody().getItems().getItems());
     }
 
     // 북위 33도에서 43도, 동경 124도에서 132도 사이에 있는 지진 정보만 필터링
