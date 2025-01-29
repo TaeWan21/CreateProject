@@ -6,7 +6,6 @@
 
 ### 대피소 임시거주지 마커 출력
 <img width="734" alt="image" src="https://github.com/user-attachments/assets/1bb8b561-3223-4b91-836f-626233e63e83">
-![image](https://github.com/user-attachments/assets/270e6acc-06b6-4d74-9f71-ab7b381a46ae)
 
 ### 지진 정보 마커 출력
 ![image](https://github.com/user-attachments/assets/5513cf1d-a7c7-440f-8fcd-014776598d9b)
